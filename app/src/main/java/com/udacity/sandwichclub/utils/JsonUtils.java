@@ -1,7 +1,9 @@
 package com.udacity.sandwichclub.utils;
 
 import android.util.Log;
+
 import com.udacity.sandwichclub.model.Sandwich;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,66 +21,75 @@ public class JsonUtils {
         Sandwich sandwich = new Sandwich();
 
         // Variables for storing parsed data
-        final String MAIN_NAME;
-        final String IMAGE;
-        final String PLACE_OF_ORIGIN;
-        final String DESCRIPTION;
-        final List<String> ALSO_KNOWN_AS = new ArrayList<>();
-        final List<String> INGREDIENTS = new ArrayList<>();
+        final String mainName;
+        final String image;
+        final String placeOfOrigin;
+        final String description;
+        final List<String> alsoKnownAsList = new ArrayList<>();
+        final List<String> ingredientsList = new ArrayList<>();
+
+        // String keys for manipulating on JSON object
+        final String jasonObjectKeyNameName = "name";
+        final String jasonObjectKeyMainName = "mainName";
+        final String jasonObjectKeyAlsoKnownAsList = "alsoKnownAs";
+        final String jasonObjectKeyPlaceOfOrigin = "placeOfOrigin";
+        final String jasonObjectKeyDescription = "description";
+        final String jasonObjectKeyImage = "image";
+        final String jasonObjectKeyINGREDIENTS = "ingredients";
 
         try {
             // Initialize new JSON Object which will be needed for saving data from a string array
             JSONObject mainJsonObject = new JSONObject(json);
 
-            if (mainJsonObject.has("name")) {
-                JSONObject nameJsonObject = mainJsonObject.getJSONObject("name");
-                if (nameJsonObject.has("mainName")) {
-                    MAIN_NAME = (String) nameJsonObject.opt("mainName");
-                    sandwich.setMainName(MAIN_NAME);
-                    Log.i(LOG_TAG, "Main name: " + MAIN_NAME);
+            if (mainJsonObject.has(jasonObjectKeyNameName)) {
+                JSONObject nameJsonObject = mainJsonObject.getJSONObject(jasonObjectKeyNameName);
+                if (nameJsonObject.has(jasonObjectKeyMainName)) {
+                    mainName = nameJsonObject.optString(jasonObjectKeyMainName); // removed cast (String)
+                    sandwich.setMainName(mainName);
+                    Log.i(LOG_TAG, "Main name: " + mainName);
                 }
 
-                if (nameJsonObject.has("alsoKnownAs")) {
-                    JSONArray secondNameJsonArray = nameJsonObject.getJSONArray("alsoKnownAs");
+                if (nameJsonObject.has(jasonObjectKeyAlsoKnownAsList)) {
+                    JSONArray secondNameJsonArray = nameJsonObject.getJSONArray(jasonObjectKeyAlsoKnownAsList);
                     if (secondNameJsonArray.length() > 0) {
                         for (int i = 0; i < secondNameJsonArray.length(); i++) {
-                            ALSO_KNOWN_AS.add(i, secondNameJsonArray.getString(i));
+                            alsoKnownAsList.add(i, secondNameJsonArray.getString(i));
                         }
                     } else {
                         Log.i(LOG_TAG, "ArrayList of \"alsoKnownAs\" is empty");
                     }
-                    sandwich.setAlsoKnownAs(ALSO_KNOWN_AS);
+                    sandwich.setAlsoKnownAs(alsoKnownAsList);
                 }
 
-                if (mainJsonObject.has("placeOfOrigin")) {
-                    PLACE_OF_ORIGIN = mainJsonObject.optString("placeOfOrigin");
-                    sandwich.setPlaceOfOrigin(PLACE_OF_ORIGIN);
-                    Log.i(LOG_TAG, "Place of origin: " + PLACE_OF_ORIGIN);
+                if (mainJsonObject.has(jasonObjectKeyPlaceOfOrigin)) {
+                    placeOfOrigin = mainJsonObject.optString(jasonObjectKeyPlaceOfOrigin);
+                    sandwich.setPlaceOfOrigin(placeOfOrigin);
+                    Log.i(LOG_TAG, "Place of origin: " + placeOfOrigin);
                 }
 
-                if (mainJsonObject.has("description")) {
-                    DESCRIPTION = mainJsonObject.optString("description");
-                    sandwich.setDescription(DESCRIPTION);
-                    Log.i(LOG_TAG, "Description: " + DESCRIPTION);
+                if (mainJsonObject.has(jasonObjectKeyDescription)) {
+                    description = mainJsonObject.optString(jasonObjectKeyDescription);
+                    sandwich.setDescription(description);
+                    Log.i(LOG_TAG, "Description: " + description);
                 }
 
-                if (mainJsonObject.has("image")) {
-                    IMAGE = mainJsonObject.optString("image");
-                    sandwich.setImage(IMAGE);
-                    Log.i(LOG_TAG, "IMAGE URL: " + IMAGE);
+                if (mainJsonObject.has(jasonObjectKeyImage)) {
+                    image = mainJsonObject.optString(jasonObjectKeyImage);
+                    sandwich.setImage(image);
+                    Log.i(LOG_TAG, "IMAGE URL: " + image);
                 }
 
-                if (mainJsonObject.has("ingredients")) {
-                    JSONArray ingredientsJsonArray = mainJsonObject.getJSONArray("ingredients");
+                if (mainJsonObject.has(jasonObjectKeyINGREDIENTS)) {
+                    JSONArray ingredientsJsonArray = mainJsonObject.getJSONArray(jasonObjectKeyINGREDIENTS);
                     if (ingredientsJsonArray.length() > 0) {
                         for (int i = 0; i < ingredientsJsonArray.length(); i++) {
-                            INGREDIENTS.add(i, ingredientsJsonArray.getString(i));
+                            ingredientsList.add(i, ingredientsJsonArray.getString(i));
                         }
                     } else {
                         Log.i(LOG_TAG, "ArrayList of ingredients is empty");
                     }
-                    sandwich.setIngredients(INGREDIENTS);
-                    Log.i(LOG_TAG + "IMAGE URL: ", INGREDIENTS.toString());
+                    sandwich.setIngredients(ingredientsList);
+                    Log.i(LOG_TAG + "IMAGE URL: ", ingredientsList.toString());
                 }
             }
         } catch (JSONException e) {

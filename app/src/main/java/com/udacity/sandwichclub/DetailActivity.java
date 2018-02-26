@@ -15,16 +15,19 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = DetailActivity.class.getName();
 
-    // Declaration of active text views
-    private ImageView sandwichImageView;
-    private TextView placeOfOriginTextView;
-    private TextView alsoKnownAsTextView;
-    private TextView descriptionTextView;
-    private TextView ingredientsTextView;
+    // Mapping active text views via "Butter Knife"
+    @BindView(R.id.image_iv) ImageView sandwichImageView;
+    @BindView(R.id.origin_tv) TextView placeOfOriginTextView;
+    @BindView(R.id.also_known_tv) TextView alsoKnownAsTextView;
+    @BindView(R.id.description_tv) TextView descriptionTextView;
+    @BindView(R.id.ingredients_tv) TextView ingredientsTextView;
 
     // Initialize a sandwich object to manipulate it in every method
     private Sandwich sandwich;
@@ -38,12 +41,8 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        // Mapping active text views
-        sandwichImageView = findViewById(R.id.image_iv);
-        placeOfOriginTextView = findViewById(R.id.origin_tv);
-        alsoKnownAsTextView = findViewById(R.id.also_known_tv);
-        descriptionTextView = findViewById(R.id.description_tv);
-        ingredientsTextView = findViewById(R.id.ingredients_tv);
+        //Bind views by Butter Knife
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -77,6 +76,8 @@ public class DetailActivity extends AppCompatActivity {
         // Set an image
         Picasso.with(this)
                 .load(sandwich.getImage())
+ //               .placeholder(R.id.image_iv) // TODO: is wrong with it, to investigation
+ //               .error(R.id.image_iv)
                 .into(sandwichImageView);
         setTitle(sandwich.getMainName());
 
@@ -117,7 +118,7 @@ public class DetailActivity extends AppCompatActivity {
                 if (i == 0) {
                     ingredientsTextView.append(ingredientsList.get(i));
                 } else {
-                    ingredientsTextView.append(", " + ingredientsList.get(i));
+                    ingredientsTextView.append(", " + ingredientsList.get(i)); //TODO: TextUtils instead of .append
                 }
             }
         } else {
