@@ -1,10 +1,7 @@
 package com.udacity.sandwichclub.utils;
 
-import android.content.Context;
 import android.util.Log;
-
 import com.udacity.sandwichclub.model.Sandwich;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,19 +12,18 @@ import java.util.List;
 public class JsonUtils {
 
     // Make logs by using log tag
-    private static final String LOG_TAG = "JsonUtils";
+    private static final String LOG_TAG = JsonUtils.class.getName();
 
     public static Sandwich parseSandwichJson(String json) {
-
         // Create new Sandwich object
         Sandwich sandwich = new Sandwich();
 
         // Variables for storing parsed data
         final String MAIN_NAME;
-        final List<String> ALSO_KNOWN_AS = new ArrayList<>();
+        final String IMAGE;
         final String PLACE_OF_ORIGIN;
         final String DESCRIPTION;
-        final String IMAGE;
+        final List<String> ALSO_KNOWN_AS = new ArrayList<>();
         final List<String> INGREDIENTS = new ArrayList<>();
 
         try {
@@ -69,7 +65,7 @@ public class JsonUtils {
                 if (mainJsonObject.has("image")) {
                     IMAGE = mainJsonObject.optString("image");
                     sandwich.setImage(IMAGE);
-                    Log.i(LOG_TAG,"IMAGE URL: " + IMAGE);
+                    Log.i(LOG_TAG, "IMAGE URL: " + IMAGE);
                 }
 
                 if (mainJsonObject.has("ingredients")) {

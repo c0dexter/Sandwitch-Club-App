@@ -47,7 +47,8 @@
             android:text="@string/detail_ingredients_label"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/ingredients_tv"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp" />
 
         <TextView
             android:id="@+id/origin_tv_label"
@@ -57,7 +58,8 @@
             android:text="@string/detail_place_of_origin_label"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/origin_tv"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp" />
 
         <TextView
             android:id="@+id/description_tv_label"
@@ -67,7 +69,8 @@
             android:text="@string/detail_description_label"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/description_tv"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp" />
 
         <TextView
             android:id="@+id/origin_tv"
@@ -78,7 +81,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/also_known_tv"
             app:layout_constraintTop_toBottomOf="@+id/also_known_tv"
-            tools:text="Cuba" />
+            tools:text="Cuba"
+            android:layout_marginRight="16dp" />
 
         <TextView
             android:id="@+id/also_known_tv"
@@ -90,7 +94,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/also_known_tv_label"
             app:layout_constraintTop_toBottomOf="@+id/image_iv"
-            tools:text='"Kanapka", "Buchta"' />
+            tools:text='"Kanapka", "Buchta"'
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="8dp" />
 
         <TextView
             android:id="@+id/ingredients_tv"
@@ -101,7 +107,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/origin_tv"
             app:layout_constraintTop_toBottomOf="@+id/origin_tv"
-            tools:text="Butter, eggs" />
+            tools:text="Butter, eggs"
+            android:layout_marginRight="16dp" />
 
         <TextView
             android:id="@+id/description_tv"
@@ -114,7 +121,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/ingredients_tv"
             app:layout_constraintTop_toBottomOf="@+id/ingredients_tv"
-            tools:text='"Shawarma also spelled shawurma or shawerma, is a Levantine meat preparation, where lamb, chicken, turkey, beef, veal, or mixed meats are placed on a spit (commonly a vertical spit in restaurants), and may be grilled for as long as a day. Shavings are cut off the block of meat for serving, and the remainder of the block of meat is kept heated on the rotating spit. Shawarma can be served on a plate (generally with accompaniments), or as a sandwich or wrap. Shawarma is usually eaten with tabbouleh, fattoush, taboon bread, tomato, and cucumber. Toppings include tahini, hummus, pickled turnips and amba' />
+            tools:text='"Shawarma also spelled shawurma or shawerma, is a Levantine meat preparation, where lamb, chicken, turkey, beef, veal, or mixed meats are placed on a spit (commonly a vertical spit in restaurants), and may be grilled for as long as a day. Shavings are cut off the block of meat for serving, and the remainder of the block of meat is kept heated on the rotating spit. Shawarma can be served on a plate (generally with accompaniments), or as a sandwich or wrap. Shawarma is usually eaten with tabbouleh, fattoush, taboon bread, tomato, and cucumber. Toppings include tahini, hummus, pickled turnips and amba'
+            android:layout_marginRight="16dp" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
