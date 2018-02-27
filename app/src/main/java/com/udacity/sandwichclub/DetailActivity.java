@@ -49,7 +49,10 @@ public class DetailActivity extends AppCompatActivity {
             closeOnError();
         }
 
-        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+        int position = 0;
+        if (intent != null) {
+            position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+        }
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
             closeOnError();
@@ -76,8 +79,8 @@ public class DetailActivity extends AppCompatActivity {
         // Set an image
         Picasso.with(this)
                 .load(sandwich.getImage())
- //               .placeholder(R.id.image_iv) // TODO: is wrong with it, to investigation
- //               .error(R.id.image_iv)
+//                .placeholder(R.id.image_iv) // I can use some picture or progress bar
+//                .error(R.id.image_iv) // I can show image when I get an error during loading image
                 .into(sandwichImageView);
         setTitle(sandwich.getMainName());
 
@@ -99,13 +102,7 @@ public class DetailActivity extends AppCompatActivity {
         // Check if the "Also known as" is not empty and populate new value
         if (sandwich.getAlsoKnownAs().size() > 0) {
             List<String> alsoKnowAsList = sandwich.getAlsoKnownAs();
-            for (int i = 0; i < alsoKnowAsList.size(); i++) {
-                if (i == 0) {
-                    alsoKnownAsTextView.append("\"" + alsoKnowAsList.get(i) + "\"");
-                } else {
-                    alsoKnownAsTextView.append(", \"" + alsoKnowAsList.get(i) + "\"");
-                }
-            }
+            alsoKnownAsTextView.setText(TextUtils.join(", ", alsoKnowAsList));
         } else {
             alsoKnownAsTextView.setText(R.string.missing_information);
             Log.i(LOG_TAG, "Other names of sandwich are missing");
@@ -114,13 +111,7 @@ public class DetailActivity extends AppCompatActivity {
         // Check if "Ingredients" are not empty and populate new value
         if (sandwich.getIngredients().size() > 0) {
             List<String> ingredientsList = sandwich.getIngredients();
-            for (int i = 0; i < ingredientsList.size(); i++) {
-                if (i == 0) {
-                    ingredientsTextView.append(ingredientsList.get(i));
-                } else {
-                    ingredientsTextView.append(", " + ingredientsList.get(i)); //TODO: TextUtils instead of .append
-                }
-            }
+            ingredientsTextView.setText(TextUtils.join(", ", ingredientsList));
         } else {
             ingredientsTextView.setText(R.string.missing_information);
             Log.i(LOG_TAG, "Ingredients are missing");
